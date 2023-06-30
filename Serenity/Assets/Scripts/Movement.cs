@@ -28,6 +28,7 @@ public class Movement : MonoBehaviour
     public float currentDashCoolDown = 0f;
 
     // WallJump Variables
+    public float airDrag;
     public float WallJumpX;
     public float WallJumpY;
     public float wallJumpCoolDown;
@@ -36,6 +37,9 @@ public class Movement : MonoBehaviour
     public bool isWallJumping;
     public float wallJumpTime;
     public float currentWallJumpTime = 0f;
+    public float currentWallSlideTime = 0f;
+    public float WallSlideTime;
+    public bool lastWall;
 
 
     private enum movementState { Idle, Running, Jumping, Falling };
@@ -47,7 +51,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         isDashing = false;
-        isWallJumping = false; 
+        isWallJumping = false;
         allowedToDash = true;
         allowedToWallJump = true;
 
@@ -65,21 +69,18 @@ public class Movement : MonoBehaviour
         dirx = Input.GetAxisRaw("Horizontal");
 
         // Jump When Spacebar is pressed 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            JumpSound.Play();
-        }
-
-        // Movement
-        if (!isDashing && !isWallJumping)
-        {
-            rb.velocity = new Vector2(dirx * runSpeed, rb.velocity.y);
+            if (IsGrounded() || OnPlatform())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                JumpSound.Play();
+            }
         }
 
         // Dash
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
-        {       
+        {
             rb.velocity = new Vector2(dirx * dashSpeed, 0);
             DashSound.Play();
             isDashing = true;
@@ -134,7 +135,7 @@ public class Movement : MonoBehaviour
             currentWallJumpCoolDown = 0;
         }
 
-        if (!allowedToWallJump && !isWallJumping)
+        if (isWallJumping)
         {
             currentWallJumpTime += Time.deltaTime;
         }
@@ -151,47 +152,109 @@ public class Movement : MonoBehaviour
 
         DoAnimation();
         WallJump();
+        AirDrag();
+    }
+
+    void AirDrag()
+    {
+        if (!IsGrounded() && !OnPlatform())
+        {
+            if (dirx == 0)
+            {
+                if (rb.velocity.x < -0.01)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x + airDrag * Time.deltaTime, rb.velocity.y);
+                }
+                if (rb.velocity.x > 0.01)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x - airDrag * Time.deltaTime, rb.velocity.y);
+                }
+            }
+            else
+            {
+                // Movement
+                if (!isDashing && !isWallJumping)
+                {
+                    rb.velocity = new Vector2(dirx * runSpeed, rb.velocity.y);
+                }
+            }
+        }
+        else
+        {
+            // Movement
+            if (!isDashing && !isWallJumping)
+            {
+                rb.velocity = new Vector2(dirx * runSpeed, rb.velocity.y);
+            }
+        }
+
     }
 
     void WallJump()
     {
-        if (allowedToWallJump)
+        if (true)
         {
             // Preform WallJump
-            if (!IsGrounded() && IsWallRight() && Input.GetButtonDown("Jump") && allowedToWallJump)
+            if (!IsGrounded() && IsWallRight() && Input.GetButtonDown("Jump"))
             {
+                lastWall = false;
                 rb.velocity = new Vector2(-WallJumpX, WallJumpY);
                 sr.flipX = true;
                 isWallJumping = true;
                 allowedToWallJump = false;
+                return;
             }
 
-            if (IsWallRight())
+            if (!IsGrounded() && IsWallLeft() && Input.GetButtonDown("Jump"))
             {
-                if (!isWallJumping)
-                {
-                    rb.velocity = new Vector2(0, -0.5f);
-                }
-            }
-
-            if (!IsGrounded() && IsWallLeft() && Input.GetButtonDown("Jump") && allowedToWallJump)
-            {
+                lastWall = true;
                 rb.velocity = new Vector2(WallJumpX, WallJumpY);
                 sr.flipX = false;
                 isWallJumping = true;
                 allowedToWallJump = false;
+                return;
             }
 
-            if (IsWallLeft())
+            if ((IsWallRight() || IsWallLeft()) && !IsGrounded())
             {
                 if (!isWallJumping)
                 {
-                    rb.velocity = new Vector2(0, -0.5f);
-                }    
+                    //rb.velocity = new Vector2(0, -0.5f);
+                    currentWallSlideTime += Time.deltaTime;
+                    if (currentWallSlideTime < WallSlideTime)
+                    {
+                        rb.velocity = new Vector2(rb.velocity.x, -0.5f);
+                    }
+                    if (currentWallSlideTime > WallSlideTime)
+                    {
+
+                    }
+                }
             }
+            if (IsGrounded())
+            {
+                currentWallSlideTime = 0;
+            }
+
+            if (lastWall == false && IsWallLeft() && isWallJumping)
+            {
+                Debug.Log("Last wall was right and touching left");
+                isWallJumping = false;
+            }
+
+            if (lastWall == true && IsWallRight() && isWallJumping)
+            {
+                isWallJumping = false;
+                Debug.Log("Last wall was left and touching right");
+            }
+
         }
     }
 
+    private bool OnPlatform()
+    {
+        return Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.up, 0.1f, movingplatforms);
+    }
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, 0.1f, ground);
@@ -228,7 +291,7 @@ public class Movement : MonoBehaviour
         {
             state = movementState.Idle;
         }
-        
+
         // Jumping / Falling Animation
         if (rb.velocity.y > 0.1f)
         {
