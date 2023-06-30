@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Collectable
+  - Trap
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - movingPlatforms
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Futher back
+    uniqueID: 2586761119
+    locked: 0
+  - name: moutnains
+    uniqueID: 2166227191
+    locked: 0
+  - name: Background
+    uniqueID: 1350239887
+    locked: 0
+  - name: Trees
+    uniqueID: 207169673
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Spikes
+    uniqueID: 4124497023
+    locked: 0
+  - name: Terrain
+    uniqueID: 3980331003
+    locked: 0
