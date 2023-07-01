@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         isDashing = false;
-        isWallJumping = false;
+        isWallJumping = false; 
         allowedToDash = true;
         allowedToWallJump = true;
 
@@ -75,12 +75,12 @@ public class Movement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 JumpSound.Play();
-            }
+            }        
         }
 
         // Dash
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
-        {
+        {       
             rb.velocity = new Vector2(dirx * dashSpeed, 0);
             DashSound.Play();
             isDashing = true;
@@ -187,9 +187,9 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector2(dirx * runSpeed, rb.velocity.y);
             }
         }
-
+        
     }
-
+    
     void WallJump()
     {
         if (true)
@@ -227,7 +227,7 @@ public class Movement : MonoBehaviour
                     }
                     if (currentWallSlideTime > WallSlideTime)
                     {
-
+                     
                     }
                 }
             }
@@ -247,7 +247,7 @@ public class Movement : MonoBehaviour
                 isWallJumping = false;
                 Debug.Log("Last wall was left and touching right");
             }
-
+            
         }
     }
 
@@ -291,7 +291,7 @@ public class Movement : MonoBehaviour
         {
             state = movementState.Idle;
         }
-
+        
         // Jumping / Falling Animation
         if (rb.velocity.y > 0.1f)
         {
