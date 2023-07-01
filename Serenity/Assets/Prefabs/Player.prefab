@@ -138,12 +138,14 @@ MonoBehaviour:
   JumpSound: {fileID: 6308203941454096468}
   DashSound: {fileID: 6308203941454096475}
   dashSpeed: 20
+  upDashSpeed: 13
   dashTime: 0.15
   currentDashTime: 0
   isDashing: 0
   allowedToDash: 0
   dashCoolDown: 0.5
   currentDashCoolDown: 0
+  isDashingUp: 0
   airDrag: 10
   WallJumpX: 10
   WallJumpY: 10
@@ -155,6 +157,7 @@ MonoBehaviour:
   currentWallJumpTime: 0
   currentWallSlideTime: 0
   WallSlideTime: 0.25
+  lastWall: 0
 --- !u!61 &6308203941454096476
 BoxCollider2D:
   m_ObjectHideFlags: 0
