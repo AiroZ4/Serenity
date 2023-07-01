@@ -20,12 +20,14 @@ public class Movement : MonoBehaviour
 
     // Dashing Variables
     public float dashSpeed;
+    public float upDashSpeed;
     public float dashTime;
     public float currentDashTime;
     public bool isDashing;
     public bool allowedToDash;
     public float dashCoolDown;
     public float currentDashCoolDown = 0f;
+    public bool isDashingUp;
 
     // WallJump Variables
     public float airDrag;
@@ -79,9 +81,24 @@ public class Movement : MonoBehaviour
         }
 
         // Dash
+        if (Input.GetButtonDown("Dash") && allowedToDash && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, upDashSpeed);
+            Debug.Log("Up dash");
+            DashSound.Play();
+            isDashingUp = true;
+            isDashing = true;
+        }
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
-        {       
-            rb.velocity = new Vector2(dirx * dashSpeed, 0);
+        {   
+            if (isDashingUp == false)
+            {
+                rb.velocity = new Vector2(dirx * dashSpeed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(dirx * dashSpeed, rb.velocity.y);
+            }
             DashSound.Play();
             isDashing = true;
         }
@@ -89,13 +106,21 @@ public class Movement : MonoBehaviour
         if (isDashing)
         {
             currentDashTime += Time.deltaTime;
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            if (isDashingUp == false)
+            {
+                rb.velocity = new Vector2(dirx * dashSpeed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(dirx * dashSpeed, rb.velocity.y);
+            }
             allowedToDash = false;
         }
 
         if (currentDashTime > dashTime)
         {
             isDashing = false;
+            isDashingUp = false;
         }
 
         if (isDashing == false)
