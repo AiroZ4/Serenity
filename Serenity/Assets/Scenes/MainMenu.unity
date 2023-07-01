@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -155155061112806214, guid: d06d71772cb87b149a5b43bc62988ddb, type: 3}
         m_TargetAssemblyTypeName: PlayLevel1, Assembly-CSharp
-        m_MethodName: Play
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
