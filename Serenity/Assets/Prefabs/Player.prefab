@@ -134,7 +134,7 @@ MonoBehaviour:
     m_Bits: 64
   movingplatforms:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   JumpSound: {fileID: 6308203941454096468}
   DashSound: {fileID: 6308203941454096475}
   dashSpeed: 20
