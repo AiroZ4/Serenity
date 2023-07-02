@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Thanks fo playing the demo
+  m_text: 'Thanks for playing the demo
 
     Full version Coming Soon'
   m_isRightToLeft: 0
@@ -527,7 +527,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 926750600}
         m_TargetAssemblyTypeName: PlayLevel1, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: Replay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -847,7 +847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Replay
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 70c9339befec7b249bb3e75f46385284, type: 2}
   m_sharedMaterial: {fileID: -5616458883993001695, guid: 70c9339befec7b249bb3e75f46385284, type: 2}

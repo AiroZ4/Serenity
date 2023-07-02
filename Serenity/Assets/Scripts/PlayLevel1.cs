@@ -9,6 +9,10 @@ public class PlayLevel1 : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex * 0);
+    }
 
     public void Quit()
     {
