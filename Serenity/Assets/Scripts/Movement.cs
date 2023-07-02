@@ -89,6 +89,10 @@ public class Movement : MonoBehaviour
             isDashingUp = true;
             isDashing = true;
         }
+        if (Input.GetButtonDown("Dash") && allowedToDash && Input.GetKey(KeyCode.UpArrow) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            rb.velocity = new Vector2(dirx * 15, (upDashSpeed - 2));
+        }
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
         {   
             if (isDashingUp == false)
@@ -134,7 +138,7 @@ public class Movement : MonoBehaviour
             currentDashCoolDown += Time.deltaTime;
         }
 
-        if (currentDashCoolDown > dashCoolDown)
+        if ((currentDashCoolDown > dashCoolDown) || IsGrounded())
         {
             allowedToDash = true;
         }

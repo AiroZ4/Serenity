@@ -68139,6 +68139,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6308203941454096477, guid: 80cfd014d2a4a7e4c9f5a07ffd408b14, type: 3}
+      propertyPath: dashTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308203941454096477, guid: 80cfd014d2a4a7e4c9f5a07ffd408b14, type: 3}
+      propertyPath: dashCoolDown
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308203941454096477, guid: 80cfd014d2a4a7e4c9f5a07ffd408b14, type: 3}
       propertyPath: movingplatforms.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -68575,7 +68583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235742926680452520, guid: fad55f2363832264a85057f73e04d951, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1235742926680452520, guid: fad55f2363832264a85057f73e04d951, type: 3}
       propertyPath: m_LocalScale.x

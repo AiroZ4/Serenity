@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97ea52e7f299ed47a4e972784d66ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 14
+  jumpForce: 16
   runSpeed: 7
   ground:
     serializedVersion: 2
@@ -138,12 +138,12 @@ MonoBehaviour:
   JumpSound: {fileID: 6308203941454096468}
   DashSound: {fileID: 6308203941454096475}
   dashSpeed: 20
-  upDashSpeed: 13
+  upDashSpeed: 18
   dashTime: 0.15
   currentDashTime: 0
   isDashing: 0
   allowedToDash: 0
-  dashCoolDown: 0.5
+  dashCoolDown: 0.99
   currentDashCoolDown: 0
   isDashingUp: 0
   airDrag: 10
