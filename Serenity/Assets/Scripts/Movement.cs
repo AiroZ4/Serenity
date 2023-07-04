@@ -28,6 +28,7 @@ public class Movement : MonoBehaviour
     public float dashCoolDown;
     public float currentDashCoolDown = 0f;
     public bool isDashingUp;
+    
 
     // WallJump Variables
     public float airDrag;
@@ -42,6 +43,8 @@ public class Movement : MonoBehaviour
     public float currentWallSlideTime = 0f;
     public float WallSlideTime;
     public bool lastWall;
+    public float WallUpSlideTime;
+    public float wallUp;
 
 
     private enum movementState { Idle, Running, Jumping, Falling };
@@ -249,14 +252,15 @@ public class Movement : MonoBehaviour
                 if (!isWallJumping)
                 {
                     //rb.velocity = new Vector2(0, -0.5f);
+
                     currentWallSlideTime += Time.deltaTime;
                     if (currentWallSlideTime < WallSlideTime)
                     {
                         rb.velocity = new Vector2(rb.velocity.x, -0.5f);
                     }
-                    if (currentWallSlideTime > WallSlideTime)
+                    if (currentWallSlideTime < WallUpSlideTime)
                     {
-                     
+                        rb.velocity = new Vector2(rb.velocity.x, wallUp);
                     }
                 }
             }
