@@ -148,7 +148,7 @@ MonoBehaviour:
   isDashingUp: 0
   airDrag: 10
   WallJumpX: 10
-  WallJumpY: 10
+  WallJumpY: 12
   wallJumpCoolDown: 0.2
   currentWallJumpCoolDown: 0
   allowedToWallJump: 0
@@ -158,6 +158,8 @@ MonoBehaviour:
   currentWallSlideTime: 0
   WallSlideTime: 0.25
   lastWall: 0
+  WallUpSlideTime: 0
+  wallUp: 0
 --- !u!61 &6308203941454096476
 BoxCollider2D:
   m_ObjectHideFlags: 0

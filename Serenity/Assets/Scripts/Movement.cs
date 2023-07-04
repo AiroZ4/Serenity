@@ -94,7 +94,7 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetButtonDown("Dash") && allowedToDash && Input.GetKey(KeyCode.UpArrow) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
         {
-            rb.velocity = new Vector2(dirx * 15, (upDashSpeed - 2));
+            rb.velocity = new Vector2(dirx * 4, (upDashSpeed - 2));
         }
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
         {   
@@ -257,10 +257,6 @@ public class Movement : MonoBehaviour
                     if (currentWallSlideTime < WallSlideTime)
                     {
                         rb.velocity = new Vector2(rb.velocity.x, -0.5f);
-                    }
-                    if (currentWallSlideTime < WallUpSlideTime)
-                    {
-                        rb.velocity = new Vector2(rb.velocity.x, wallUp);
                     }
                 }
             }

@@ -7,11 +7,13 @@ public class PlayerDeath : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private Vector3 RespawnPoint;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        RespawnPoint = transform.position;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,16 +31,12 @@ public class PlayerDeath : MonoBehaviour
 
         // Play Death Animation
         anim.SetTrigger("Death");
-
-        // Wait a Bit
-
-        // Restart Level
-        // Check animation sequence
-
     }
 
     private void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transform.position = RespawnPoint;
+        anim.SetTrigger("Respawn");
     }
 }
