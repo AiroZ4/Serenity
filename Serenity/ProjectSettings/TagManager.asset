@@ -7,6 +7,7 @@ TagManager:
   - Collectable
   - Trap
   - NoBottom
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

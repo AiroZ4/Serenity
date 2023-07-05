@@ -79,7 +79,7 @@ public class Movement : MonoBehaviour
             if (IsGrounded() || OnPlatform())
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                JumpSound.Play();
+                
             }        
         }
 
@@ -88,7 +88,7 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, upDashSpeed);
             Debug.Log("Up dash");
-            DashSound.Play();
+            
             isDashingUp = true;
             isDashing = true;
         }
@@ -106,7 +106,7 @@ public class Movement : MonoBehaviour
             {
                 rb.velocity = new Vector2(dirx * dashSpeed, rb.velocity.y);
             }
-            DashSound.Play();
+            
             isDashing = true;
         }
 
@@ -340,4 +340,5 @@ public class Movement : MonoBehaviour
         anim.SetInteger("state", (int)state);
 
     }
+
 }

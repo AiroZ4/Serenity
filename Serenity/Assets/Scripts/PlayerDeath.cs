@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerDeath : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private SpriteRenderer sprite;
     private Animator anim;
     private Vector3 RespawnPoint;
 
@@ -13,14 +14,24 @@ public class PlayerDeath : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         RespawnPoint = transform.position;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.tag == "Trap")
         {
             Die();
             Debug.Log("You're Dead");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CheckPoint")
+        {
+            RespawnPoint = transform.position;
+            Debug.Log("Checkpoint Touched");
         }
     }
 
@@ -37,6 +48,7 @@ public class PlayerDeath : MonoBehaviour
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         transform.position = RespawnPoint;
-        anim.SetTrigger("Respawn");
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        sprite.enabled = true;
     }
 }
