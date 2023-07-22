@@ -19,9 +19,11 @@ public class MovementPlayer : MonoBehaviour
     public AudioSource JumpSound;
     public AudioSource DeathSound;
 
+    public GameObject PauseMenu;
+
     private enum movementState { Idle, Running, Jumping, Falling};
 
-   // private Animator anim;
+    private Animator anim;
 
     void Start()
     {
@@ -30,7 +32,8 @@ public class MovementPlayer : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         JumpSound = GetComponent<AudioSource>();
         DeathSound = GetComponent<AudioSource>();
-        // anim = GetComponent<Animator>();
+        PauseMenu = GetComponent<GameObject>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +53,8 @@ public class MovementPlayer : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
+
+        
 
         Animation();
         Bounce();
@@ -79,18 +84,19 @@ public class MovementPlayer : MonoBehaviour
     // Animations
     private void Animation()
     {
-        //movementState state;
+        movementState state;
+
         // Check direction and flip character sprite based on direction 
         if (dirx > 0)
         {
-            //state = movementState.Running;
+            state = movementState.Running;
             sr.flipX = false;
         }
         else if (dirx < 0)
         {
-            //state = movementState.Running;
+            state = movementState.Running;
             sr.flipX = true;
-        }/*
+        }
         else
         {
             state = movementState.Idle;
@@ -103,7 +109,7 @@ public class MovementPlayer : MonoBehaviour
         {
             state = movementState.Falling;
         }
-        anim.SetInteger("state", (int)state); */
+        anim.SetInteger("state", (int)state);
     }
     
 }

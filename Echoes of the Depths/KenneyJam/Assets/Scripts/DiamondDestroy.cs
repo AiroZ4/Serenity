@@ -5,12 +5,12 @@ using UnityEngine;
 public class DiamondDestroy : MonoBehaviour
 {
     public GameObject Invisible1;
-    private SpriteRenderer sr;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+    
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
