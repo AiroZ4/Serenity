@@ -94,7 +94,7 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetButtonDown("Dash") && allowedToDash && Input.GetKey(KeyCode.UpArrow) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
         {
-            rb.velocity = new Vector2(dirx * 4, (upDashSpeed - 2));
+            rb.velocity = new Vector2(dirx * 1.5f, (upDashSpeed / 1.5f));
         }
         if (Input.GetButtonDown("Dash") && allowedToDash == true)
         {   
